@@ -27,14 +27,10 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
-from gi.repository import GLib
 from gi.repository import Vte
 import sys
-import os
 import comun
 from comun import _
-import subprocess
-import shlex
 from doitinbackground import DoItInBackground
 from progreso import Progreso
 import utils
@@ -80,10 +76,13 @@ class SmartTerminal(Vte.Terminal):
     def on_ended(self, diib, ok):
         if ok is True:
             kind = Gtk.MessageType.INFO
-            message = _('Repository added')
+            if len(self.apps) > 1:
+                message = _('Install packages')
+            else:
+                message = _('Install package')
         else:
             kind = Gtk.MessageType.ERROR
-            message = _('Repository NOT added')
+            message = _('Some packages could be installed')
         dialog = Gtk.MessageDialog(self.parent, 0, kind,
                                    Gtk.ButtonsType.OK,
                                    message)
@@ -92,12 +91,12 @@ class SmartTerminal(Vte.Terminal):
         Gtk.main_quit()
 
 
-class PPAUrlDialog(Gtk.Window):
+class GAptInDialog(Gtk.Window):
     def __init__(self, args):
         Gtk.Window.__init__(self)
         if len(args) < 2:
             Gtk.main_quit()
-        self.set_title(_('Add ppa repository'))
+        self.set_title(_('Install package'))
         self.connect('delete-event', Gtk.main_quit)
         self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
         self.set_icon_from_file(comun.ICON)
@@ -112,22 +111,15 @@ class PPAUrlDialog(Gtk.Window):
         grid.set_row_spacing(MARGIN)
         self.add(grid)
 
-        if args[1].find('?') > -1:
-            self.ppa = args[1].split('?')[0]
-            if len(args[1].split('?')[1]) == 0:
-                self.apps = None
-            elif len(args[1].split('?')[1]) == 1:
-                self.apps = args[1].split('?')[1]
-            else:
-                self.apps = args[1].split('?')[1].split(',')
+        if args[1].find('apt://') > -1:
+            self.apps = args[1].split('apt://')[1].split(',')
+        elif args[1].find('apt:') > -1:
+            self.apps = args[1].split('apt:')[1].split(',')
         else:
-            self.ppa = args[1]
-            self.apps = None
-        if self.apps is None:
-            label = Gtk.Label(_('Add "%s" repository?') % self.ppa)
-        else:
-            label = Gtk.Label(_('Add "%s" repository and install %s?') % (
-                self.ppa, joiner(self.apps)))
+            Gtk.main_quit()
+        if len(self.apps) > 0:
+            label = Gtk.Label(_('Install this packages: %s?') % (
+                joiner(self.apps)))
         label.set_alignment(0, 0.5)
         grid.attach(label, 0, 0, 2, 1)
         expander = Gtk.Expander()
@@ -166,26 +158,20 @@ class PPAUrlDialog(Gtk.Window):
         Gtk.main_quit()
 
     def on_button_ok_clicked(self, button):
-        if self.ppa.startswith('ppa:'):
-            if not utils.is_ppa_repository_added(self.ppa):
-                commands = ['add-apt-repository --yes %s' % self.ppa,
-                            'apt update',
-                            'apt upgrade']
-            else:
-                commands = []
-            if self.apps is not None:
-                for app in self.apps:
-                    if not utils.is_package_installed(app):
-                        commands.append('apt install %s' % app)
-            print(commands)
-            self.terminal.execute(commands)
+        if len(self.apps) > 0:
+            commands = []
+            for app in self.apps:
+                if not utils.is_package_installed(app):
+                    commands.append('apt install %s' % app)
+        print(commands)
+        self.terminal.execute(commands)
 
 
 def main(args):
     print(args)
     if len(args) < 2:
-        args.append('ppa:atareao/atareao?')
-    win = PPAUrlDialog(args)
+        args.append('apt://my-weather-indicator')
+    GAptInDialog(args)
     Gtk.main()
 
 

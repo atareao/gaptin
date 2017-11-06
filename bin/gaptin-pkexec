@@ -1,6 +1,6 @@
 #!/bin/bash
 LOCATIONS=(
-"/opt/extras.ubuntu.com/ppaurl/share/ppaurl/ppaurl.py"
+"/opt/extras.ubuntu.com/gaptin/share/gaptin/gaptin.py"
 )
 
 for ((i = 0; i < ${#LOCATIONS[@]}; i++))

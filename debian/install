@@ -1,6 +1,6 @@
-src/*.py /opt/extras.ubuntu.com/ppaurl/share/ppaurl
+src/*.py /opt/extras.ubuntu.com/gaptin/share/gaptin
 bin/* /usr/bin
-data/icons/*.svg /opt/extras.ubuntu.com/ppaurl/share/icons
-data/extras-ppaurl.desktop /usr/share/applications
-debian/changelog /opt/extras.ubuntu.com/ppaurl/share/ppaurl
-policykit/actions/com.ubuntu.pkexec.ppaurl.policy /usr/share/polkit-1/actions/
+data/icons/*.svg /opt/extras.ubuntu.com/gaptin/share/icons
+data/extras-gaptin.desktop /usr/share/applications
+debian/changelog /opt/extras.ubuntu.com/gaptin/share/gaptin
+policykit/actions/com.ubuntu.pkexec.gaptin.policy /usr/share/polkit-1/actions/

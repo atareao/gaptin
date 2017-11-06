@@ -21,9 +21,6 @@
 
 import subprocess
 import shlex
-from os import listdir
-from os.path import isfile, join, basename
-import glob
 
 
 def get_version():
@@ -49,23 +46,7 @@ def is_package_installed(package_name):
     return False
 
 
-def is_ppa_repository_added(repository):
-    if repository.find('/') and repository.startswith('ppa:'):
-        repository = repository[4:]
-        firstpart, secondpart = repository.split('/')
-        mypath = '/etc/apt/sources.list.d'
-        onlyfiles = [basename(f).replace('.list', '') for f in
-                     glob.glob(join(mypath, '*.list'))
-                     if isfile(join(mypath, f))]
-        for element in onlyfiles:
-            if element.startswith(firstpart) and \
-                    element[len(firstpart):].find(secondpart) > -1:
-                return True
-    return False
-
-
 if __name__ == '__main__':
     print(is_package_installed('my-weather-indicator'))
     print(is_package_installed('utext'))
     print(get_version())
-    print(is_ppa_repository_added('ppa:atareao/atareao'))

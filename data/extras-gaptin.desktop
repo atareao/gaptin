@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/usr/bin/gaptin %u
+Name=GAptIn
+Comment=A graphical interface for apt install
+Icon=/opt/extras.ubuntu.com/gaptin/share/icons/gaptin.svg
+Categories=Application;Network;
+MimeType=x-scheme-handler/apt;

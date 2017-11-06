@@ -1,4 +1,4 @@
-Source: ppaurl
+Source: gaptin
 Section: utils
 Priority: extra
 Maintainer: Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.4
 Homepage: http://www.atareao.es
 
-Package: ppaurl
+Package: gaptin
 Architecture: all
 Depends: ${misc:Depends},
     python3,
@@ -14,5 +14,5 @@ Depends: ${misc:Depends},
     gir1.2-gtk-3.0,
     gir1.2-gstreamer-1.0,
     gir1.2-gst-plugins-base-1.0,
-Description: An utility to add repositories
- ppaurl is a simple utility to add PPA repositories from web
+Description: A graphical interface for apt
+ A graphical interface for install applications with apt install

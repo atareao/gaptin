@@ -1,19 +1,19 @@
-ppaurl
+gaptin
 ======
 
-ppaurl is a utility to add PPA repositories to the system
+gaptin is a graphical interface to install apps with apt install
 
 Download
 --------
 
 Download the [package][dlp] *or* checkout the source:
 
-    $ git clone https://github.com/atareao/ppaurl
+    $ git clone https://github.com/atareao/gaptin
 
 
 Installation
 ------------
 
-    $ sudo add-apt-repositoy ppa:atareao/ppaurl
+    $ sudo add-apt-repositoy ppa:atareao/gaptin
     $ sudo apt-get update
-    $ sudo apt-get install ppaurl
+    $ sudo apt-get install gaptin

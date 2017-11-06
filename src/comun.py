@@ -39,16 +39,16 @@ PARAMS = {'first-time': True,
           'height': 600,
           }
 
-APP = 'ppaurl'
-APPNAME = 'ppaurl'
+APP = 'gaptin'
+APPNAME = 'gaptin'
 APP_CONF = APP + '.conf'
 CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.config')
 CONFIG_APP_DIR = os.path.join(CONFIG_DIR, APP)
 CONFIG_FILE = os.path.join(CONFIG_APP_DIR, APP_CONF)
 # check if running from source
 if is_package():
-    ROOTDIR = '/opt/extras.ubuntu.com/ppaurl'
-    APPDIR = os.path.join(ROOTDIR, 'share/ppaurl')
+    ROOTDIR = '/opt/extras.ubuntu.com/gaptin'
+    APPDIR = os.path.join(ROOTDIR, 'share/gaptin')
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
     BINDIR = os.path.join(ROOTDIR, 'bin')
     ICONDIR = os.path.join(ROOTDIR, 'share/icons')
@@ -65,7 +65,7 @@ else:
     DEBIANDIR = os.path.normpath(os.path.join(ROOTDIR, '../debian'))
     CHANGELOG = os.path.join(DEBIANDIR, 'changelog')
 #
-ICON = os.path.join(ICONDIR, 'ppaurl.svg')
+ICON = os.path.join(ICONDIR, 'gaptin.svg')
 BITCOIN_LOGO = os.path.join(ICONDIR, 'bitcoin.png')
 FLATTR_LOGO = os.path.join(ICONDIR, 'flattr.png')
 PAYPAL_LOGO = os.path.join(ICONDIR, 'paypal.png')

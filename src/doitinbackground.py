@@ -63,7 +63,7 @@ class DoItInBackground(IdleObject, Thread):
                 stdout_line = stdout_line.replace('\n', '\n\r')
                 self.printer.feed(stdout_line.encode())
             return_code = po.wait()
-            if command.startswith('add-apt-repository') and\
+            if command.startswith('apt install') and\
                     answer.find('OK') == -1:
                         self.ok = False
             if return_code:
